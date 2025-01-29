@@ -8,22 +8,26 @@ Gradio application for automatic transcription and summarization of meeting reco
 Clone the repository and install dependencies:
 
 ```sh
-git clone https://github.com/titipata/gradio_mu_meeting_summary
+git clone https://github.com/biodatlab/gradio-meeting-summariser
 pip install -r requirements.txt
 ```
 
-Then set up Gemini API key
+Set up Gemini API key
 
 ```sh
 export GEMINI_API_KEY="..."
 ```
 
-Run `gradio` application with a given `app.py` file
+Then, run `gradio` application with a given `app.py` file
 
 ```py
 python app.py
 ```
 
+## Example interface
+
+The user can upload audio file for transcribing and summarizing an audio file.
+
 <p align="center">
-  <img src="assets/example_interface.png" width="500"/>
+  <img src="assets/example_interface.png" width="700"/>
 </p>
