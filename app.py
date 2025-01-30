@@ -65,7 +65,16 @@ def summarize_transcript(transcript_file):
     except Exception as e:
         raise gr.Error(f"Error summarizing transcript: {str(e)}")
 
-
+# Clear temporaty folder of process_audio
+def clear_segments():
+    segment_folder = "segments"
+    if os.path.exists(segment_folder):
+        shutil.rmtree(segment_folder)  
+        
+    if os.path.exists(segment_folder):
+        return "Error: Failed to delete the segment folder!"
+    else:
+        return "Segment folder cleared successfully!"
 
 # Create Gradio interface
 with gr.Blocks(title="Speech Processing and Summarization") as demo:
@@ -101,6 +110,9 @@ with gr.Blocks(title="Speech Processing and Summarization") as demo:
                 transcript_output = gr.File(label="Download Transcription")
                 summary_text = gr.Markdown(label="Summary", visible=False)
                 summary_file = gr.File(label="Download Summary", visible=False)
+
+                clear_button = gr.Button("Clear Segments")
+                clear_status = gr.Markdown("") 
             
             def update_visibility(should_summarize):
                 return {
@@ -118,6 +130,11 @@ with gr.Blocks(title="Speech Processing and Summarization") as demo:
                 process_audio,
                 inputs=[audio_input, summarize_checkbox],
                 outputs=[transcript_output, summary_text, summary_file]
+            )
+            clear_button.click(
+                clear_segments,
+                inputs=[],
+                outputs=[clear_status]
             )
 
         # Transcript Summarization Tab
