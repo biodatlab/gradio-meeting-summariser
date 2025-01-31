@@ -144,7 +144,7 @@ with gr.Blocks(title="Speech Processing and Summarization") as demo:
             with gr.Column():
                 transcript_input = gr.File(
                     label="Upload Transcript",
-                    file_types=["txt", "csv"]
+                    file_types=[".txt", ".csv"]
                 )
                 summarize_button = gr.Button("Generate Summary")
                 
