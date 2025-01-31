@@ -108,4 +108,4 @@ def transcribe_audio_folder(model, folder_path, prompt="Please transcribe the gi
             })
 
     # Convert to DataFrame
-    return pd.DataFrame(transcriptions)
+    return pd.DataFrame(transcriptions).sort_values("audio_file")
