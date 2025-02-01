@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from markdown import markdown
 
 
-def chunk_text(text, max_tokens=2000):
+def chunk_text(text: str, max_tokens: int = 2000) -> list:
     """Split text into chunks of approximately max_tokens"""
     # Simple splitting by newlines first
     paragraphs = text.split('\n')
@@ -31,7 +31,7 @@ def chunk_text(text, max_tokens=2000):
     return chunks
 
 
-def get_chunk_summary(chunk):
+def get_chunk_summary(chunk: str) -> str:
     """Get summary for a single chunk"""
     prompt = f"""Please summarize the following Thai conversation segment into key points:
 
@@ -45,7 +45,8 @@ Text segment:
 Please provide the summary in Thai language."""
     return prompt
 
-def combine_summaries(summaries):
+
+def combine_summaries(summaries: list) -> str:
     """Combine multiple chunk summaries into final summary"""
     combined_text = "\n\n".join(summaries)
     
@@ -66,7 +67,7 @@ def combine_summaries(summaries):
     return final_prompt
 
 
-def markdown_to_docx(markdown_text, output_filename='output.docx'):
+def markdown_to_docx(markdown_text: str, output_filename: str = 'output.docx') -> None:
    """
    Convert markdown text to docx file
    
@@ -103,7 +104,7 @@ def markdown_to_docx(markdown_text, output_filename='output.docx'):
    doc.save(output_filename)
 
 
-def summarise_from_file(model, file, output_path="summary_report.docx"):
+def summarise_from_file(model, file: str, add_transcript: bool = True, output_path: str = "summary_report.docx"):
     file = Path(file)
 
     # read CSV file
@@ -128,6 +129,10 @@ def summarise_from_file(model, file, output_path="summary_report.docx"):
         chunk_summaries.append(summary)
     final_summary_prompt = combine_summaries(chunk_summaries)
     final_summary = model.generate_content(final_summary_prompt).text
+
+    # Add transcript to final summary
+    if add_transcript:
+        final_summary += f"\n\n\n## ผลการถอดความ:\n{transcript}"
 
     # Save to Word file
     markdown_to_docx(final_summary, output_path)

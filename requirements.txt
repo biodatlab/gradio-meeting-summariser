@@ -11,3 +11,4 @@ librosa
 google-generativeai
 pathlib
 pydub
+moviepy==2.0.0.dev2

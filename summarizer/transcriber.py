@@ -10,9 +10,7 @@ from pydub import AudioSegment
 import google.generativeai as genai
 
 
-prompt = "Please transcribe the given recorded interview speech."
-
-def convert_mp4_to_wav(input_path, output_path=None):
+def convert_mp4_to_wav(input_path: str, output_path: str = None) -> None:
    """Convert MP4 video to WAV audio using librosa"""
    if output_path is None:
        output_path = input_path.rsplit('.', 1)[0] + '.wav'
@@ -23,7 +21,7 @@ def convert_mp4_to_wav(input_path, output_path=None):
    print(f"Converted {input_path} to {output_path}")
 
 
-def split_audio(audio_path, output_folder, duration=300, overlap=30):
+def split_audio(audio_path: str, output_folder: str, duration: int = 300, overlap: int = 30) -> None:
     """
     Split audio file into segments with specified duration and overlap interval.
     
@@ -66,7 +64,7 @@ def split_audio(audio_path, output_folder, duration=300, overlap=30):
     print("Audio splitting completed.")
 
 
-def transcribe_audio_folder(model, folder_path, prompt="Please transcribe the given recorded speech in Thai and English."):
+def transcribe_audio_folder(model, folder_path: str, prompt: str = "Please transcribe the given recorded speech in Thai and English."):
     """
     Transcribe all WAV files in a folder using Google's Generative AI.
     
