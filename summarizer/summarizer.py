@@ -116,7 +116,7 @@ def summarise_from_file(model, file: str, add_transcript: bool = True, output_pa
             chunks = chunk_text(transcript)
     # read general text file
     else:
-        with open(file.name, 'r') as f:
+        with file.open('r') as f:
             text = f.read().strip()
         num_rows = 10
         chunk_size = max(1, len(text) // num_rows)
