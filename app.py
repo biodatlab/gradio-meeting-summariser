@@ -1,4 +1,5 @@
 import os
+import shutil
 import gradio as gr
 from pathlib import Path
 import google.generativeai as genai
