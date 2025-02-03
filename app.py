@@ -28,16 +28,21 @@ def process_audio(audio_file, should_summarize):
         output_wav_name = Path(audio_file.name).stem + '.wav'
         output_wav_path = str(Path(input_path).parent / output_wav_name)
         
-        # Create output directories
-        segment_folder = Path("segments/")
-        segment_folder.mkdir(exist_ok=True)
-        
         # Process audio
         print(f"Converting {input_path} to {output_wav_path}")
         convert_mp4_to_wav(input_path)  # This should output to output_wav_path
+
+        #  Create output dir based on current timestamp for converted audio.
+        current_time = time.strftime("%Y%m%d-%H%M")
+        current_time_segment_folder = segment_folder / current_time
+        os.makedirs(current_time_segment_folder, exist_ok=True)
+
+        # Create folder for segmented audios.
+        segment_audios_folder = current_time_segment_folder / output_wav_name
+        os.makedirs(segment_audios_folder, exist_ok=True)
         
         print(f"Splitting audio from {output_wav_path}")
-        split_audio(output_wav_path, str(segment_folder))
+        split_audio(output_wav_path, str(segment_audios_folder))
         
         # Transcribe
         print("Transcribing segments...")
