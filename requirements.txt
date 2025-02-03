@@ -1,9 +1,6 @@
-json
 python-docx
 tqdm
 gradio
-csv
-textwrap
 BeautifulSoup4
 markdown
 pandas
