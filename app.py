@@ -1,5 +1,6 @@
 import os
 import shutil
+import time
 import gradio as gr
 from pathlib import Path
 import google.generativeai as genai
@@ -11,6 +12,10 @@ assert "GEMINI_API_KEY" in os.environ, "Please set the GEMINI_API_KEY environmen
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 model = genai.GenerativeModel('models/gemini-1.5-flash')
 
+
+# Create main output directories for segmented audios.
+segment_folder = Path("segments/")
+segment_folder.mkdir(exist_ok=True)
 
 def process_audio(audio_file, should_summarize):
     """Process audio file: convert, segment, transcribe and optionally summarize"""
