@@ -9,6 +9,7 @@ Clone the repository and install dependencies:
 
 ```sh
 git clone https://github.com/biodatlab/gradio-meeting-summariser
+cd gradio-meeting-summariser
 pip install -r requirements.txt
 ```
 
@@ -22,6 +23,12 @@ Then, run `gradio` application with a given `app.py` file
 
 ```py
 python app.py
+```
+
+Alternatively, you can run an application with specified username and password
+
+```py
+python app.py --username <yourusername> --password <yourpass>
 ```
 
 ## Example interface

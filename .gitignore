@@ -1,5 +1,9 @@
-# Temporary files
+# Temporary, Word, Excel, CSV, Text files
 segments/
+*.docx
+*.xlsx
+*.csv
+*.txt
 
 ## MacOS
 # General
