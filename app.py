@@ -77,8 +77,8 @@ def summarize_transcript(transcript_file):
         if transcript_file is None:
             raise gr.Error("Please upload a transcript file")
         output_summary_file = f"summary_{Path(transcript_file.name).stem}.docx"
-        markdown_summary, summary_file = summarise_from_file(model, transcript_file.name, output_summary_file)
-        return markdown_summary, summary_file
+        markdown_summary, summary_docx = summarise_from_file(model, transcript_file.name, output_summary_file)
+        return markdown_summary, summary_docx
     except Exception as e:
         raise gr.Error(f"Error summarizing transcript: {str(e)}")
 

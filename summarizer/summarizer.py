@@ -117,10 +117,10 @@ def summarise_from_file(model, file: str, add_transcript: bool = True, output_pa
     # read general text file
     else:
         with file.open('r') as f:
-            text = f.read().strip()
+            transcript = f.read().strip()
         num_rows = 10
-        chunk_size = max(1, len(text) // num_rows)
-        chunks = textwrap.wrap(text, chunk_size)
+        chunk_size = max(1, len(transcript) // num_rows)
+        chunks = textwrap.wrap(transcript, chunk_size)
 
     chunk_summaries = []
     for chunk in tqdm(chunks):
